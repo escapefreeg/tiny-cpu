@@ -9,11 +9,11 @@ initial begin
     num = 6'b000001;
 end
 
-//ÉÏÉıÑØ¶Á³öÖµ
+//ä¸Šå‡æ²¿è¯»å‡ºå€¼
 always @(posedge Clk) begin
     rnum = num;
 end
-//ÏÂ½µÑØĞŞ¸ÄÖµ
+//ä¸‹é™æ²¿ä¿®æ”¹å€¼
 always @(negedge Clk) begin
     if (Clrn == 1) begin
         num = num + 1;

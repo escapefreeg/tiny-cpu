@@ -1,11 +1,11 @@
 module PCAdd4(PC_o,PCadd4);
-//µ±Ç°pcÖµ
+//å½“å‰pcå€¼
 input [31:0] PC_o;
-//ÏÂÒ»¸öpcÖµ(pc+4)
+//ä¸‹ä¸€ä¸ªpcå€¼(pc+4)
 output [31:0] PCadd4;
 
 assign PCadd4 = PC_o + 4;
 
 
-//pcÖµ¿ÉÄÜÔ½½ç£¬²»ĞèÒª¿¼ÂÇ
+//pcå€¼å¯èƒ½è¶Šç•Œï¼Œä¸éœ€è¦è€ƒè™‘
 endmodule

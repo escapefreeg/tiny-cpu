@@ -19,7 +19,7 @@ reg [4:0] reg10;
 reg [1:0] reg4,reg11,reg12;
 
 wire Clrn_SC;
-//Clrn = 0»òcondep = 1Ê±ÇåÁã
+//Clrn = 0æˆ–condep = 1æ—¶æ¸…é›¶
 assign Clrn_SC=Clrn&~condep;
 
 
@@ -42,20 +42,20 @@ always @(posedge Clk) begin
 end
 
 always @(negedge Clk) begin
-    //Clrn == 0Êä³öÇå0
+    //Clrn == 0è¾“å‡ºæ¸…0
     if (Clrn_SC == 0) begin
         reg0= 0;reg1= 0;reg2= 0;
         reg3= 0;reg4= 0;reg5= 0;
         reg7= 0;reg8= 0;reg9= 0;
         reg10= 0;reg11= 0;reg12= 0;reg13= 0;
     end
-    //En == 1ÔÚÊ±ÖÓÉÏÉıÑØ´òÈëÊı¾İ
+    //En == 1åœ¨æ—¶é’Ÿä¸Šå‡æ²¿æ‰“å…¥æ•°æ®
     else if(En == 1) begin
         reg0= D0;reg1= D1;reg2= D2;
         reg3= D3;reg4= D4;reg5= D5;
         reg7= D7;reg8= D8;reg9= D9;
         reg10= D10;reg11= D11;reg12= D12;reg13= D13;
     end
-    //En == 0 ²»±ä¼´¿É
+    //En == 0 ä¸å˜å³å¯
 end
 endmodule

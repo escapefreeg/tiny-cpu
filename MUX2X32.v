@@ -7,7 +7,7 @@ always @(*) begin
     case (S)
         0: Y = A0;
         1: Y = A1;
-        //ËùÓÐÇé¿ö¶¼¿¼ÂÇÁË£¬ËùÒÔ²»ÐèÒª¼ÓÈëdefault
+        //æ‰€æœ‰æƒ…å†µéƒ½è€ƒè™‘äº†ï¼Œæ‰€ä»¥ä¸éœ€è¦åŠ å…¥default
     endcase
 end
 endmodule

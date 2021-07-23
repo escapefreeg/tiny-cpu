@@ -3,25 +3,25 @@ input [31:0]IF_Result;
 input Clk,En,Clrn;
 output reg [31:0] IF_Addr;
 reg [31:0]pc;
-//³õÊ¼»¯PCµÄÖµÎª0
+//åˆå§‹åŒ–PCçš„å€¼ä¸º0
 
 initial begin
     pc = 32'b0;
 end
-//ÉÏÉıÑØ¶Á³öpcÖµ
+//ä¸Šå‡æ²¿è¯»å‡ºpcå€¼
 always @(posedge Clk) begin
     IF_Addr = pc;
 end
-//ÏÂ½µÑØĞŞ¸ÄpcÖµ
+//ä¸‹é™æ²¿ä¿®æ”¹pcå€¼
 always @(negedge Clk) begin
-    //Clrn == 0Êä³öÇå0
+    //Clrn == 0è¾“å‡ºæ¸…0
     if (Clrn == 0) begin
         pc = 32'b0;
     end
-    //En == 1ÔÚÊ±ÖÓÉÏÉıÑØ´òÈëÊı¾İ
+    //En == 1åœ¨æ—¶é’Ÿä¸Šå‡æ²¿æ‰“å…¥æ•°æ®
     else if(En == 1) begin
         pc = IF_Result;
     end
-    //En == 0 ²»±ä¼´¿É
+    //En == 0 ä¸å˜å³å¯
 end
 endmodule

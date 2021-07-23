@@ -28,18 +28,18 @@ always @(posedge Clk) begin
 end
 
 always @(negedge Clk) begin
-    //Clrn == 0Êä³öÇå0
+    //Clrn == 0è¾“å‡ºæ¸…0
     if (Clrn == 0) begin
         reg0= 0;reg1= 0;reg2= 0;
         reg3= 0;reg4= 0;reg5= 0;
         reg6= 0;
     end
-    //En == 1ÔÚÊ±ÖÓÏÂ½µÑØ´òÈëÊı¾İ
+    //En == 1åœ¨æ—¶é’Ÿä¸‹é™æ²¿æ‰“å…¥æ•°æ®
     else if(En == 1) begin
         reg0= D0;reg1= D1;reg2= D2;
         reg3= D3;reg4= D4;reg5= D5;
         reg6= D6;
     end
-    //En == 0 ²»±ä¼´¿É
+    //En == 0 ä¸å˜å³å¯
 end
 endmodule

@@ -3,16 +3,16 @@ input [31:0] D0,D1;
 input En,Clk,Clrn;
 input condep;
 output reg [31:0] Q0,Q1;
-//Á½¸öreg
+//ä¸¤ä¸ªreg
 reg [31:0] reg0,reg1;
 wire Clrn_C;
 
 
-//Ö»ÓĞClrn = 1£¬condep = 0Ê±Clrn_C²Å»áÎª1
-//Ö»ÓĞClrn = 0»òcondep = 1Ê±Clrn_CÎª0
+//åªæœ‰Clrn = 1ï¼Œcondep = 0æ—¶Clrn_Cæ‰ä¼šä¸º1
+//åªæœ‰Clrn = 0æˆ–condep = 1æ—¶Clrn_Cä¸º0
 assign Clrn_C=Clrn&~condep;
 
-//³õÊ¼»¯¼Ä´æÆ÷ÄÚÊı¾İ
+//åˆå§‹åŒ–å¯„å­˜å™¨å†…æ•°æ®
 initial begin
     reg0=32'b0;
     reg1=32'b0;
@@ -24,16 +24,16 @@ always @(posedge Clk) begin
 end
 
 always @(negedge Clk) begin
-    //Clrn_C == 0¼Ä´æÆ÷Çå0
+    //Clrn_C == 0å¯„å­˜å™¨æ¸…0
     if (Clrn_C == 0) begin
         reg0=32'b0;
         reg1=32'b0;
     end
-    //En == 1ÔÚÊ±ÖÓÏÂ½µÑØ´òÈëÊı¾İ
+    //En == 1åœ¨æ—¶é’Ÿä¸‹é™æ²¿æ‰“å…¥æ•°æ®
     else if(En == 1) begin
         reg0 = D0;
         reg1 = D1;
     end
-    //En == 0 ÔİÍ£¼´¿É
+    //En == 0 æš‚åœå³å¯
 end
 endmodule

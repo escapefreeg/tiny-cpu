@@ -1,4 +1,4 @@
-module ALU(X,Y,Aluc,R,Z);//ALUËãÊıµ¥Ôª
+module ALU(X,Y,Aluc,R,Z);//ALUç®—æ•°å•å…ƒ
 input [31:0]X,Y;
 input [1:0]Aluc;
 output reg[31:0]R;
@@ -7,13 +7,13 @@ assign Z=~|R;
 
 always @(*) begin
     case(Aluc)
-        //¼Ó·¨
+        //åŠ æ³•
         2'b00:R = X+Y;
-        //¼õ·¨
+        //å‡æ³•
         2'b01:R = X-Y;
-        //Óë²Ù×÷
+        //ä¸æ“ä½œ
         2'b10:R = X&Y;
-        //»ò²Ù×÷
+        //æˆ–æ“ä½œ
         2'b11:R = X|Y;
     endcase
 end

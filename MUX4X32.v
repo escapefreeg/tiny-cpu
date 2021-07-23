@@ -9,7 +9,7 @@ always @(*) begin
         2'b01: Y = A1;
         2'b10: Y = A2;
         2'b11: Y = A3;
-        //ËùÓÐÇé¿ö¶¼¿¼ÂÇÁË£¬ËùÒÔ²»ÐèÒª¼ÓÈëdefault
+        //æ‰€æœ‰æƒ…å†µéƒ½è€ƒè™‘äº†ï¼Œæ‰€ä»¥ä¸éœ€è¦åŠ å…¥default
     endcase
 end
 

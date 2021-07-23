@@ -28,7 +28,7 @@ output [1:0]Pcsrc,Aluc;
 output reg [1:0]FwdA,FwdB;
 
 
-//ÅĞ¶Ï±¾´ÎÖ¸ÁîµÄÀàĞÍ
+//åˆ¤æ–­æœ¬æ¬¡æŒ‡ä»¤çš„ç±»å‹
 wire R_type=~|Op;
 wire I_add=R_type&Func[5]&~Func[4]&~Func[3]&~Func[2]&~Func[1]&~Func[0];
 wire I_sub=R_type&Func[5]&~Func[4]&~Func[3]&~Func[2]&Func[1]&~Func[0];
@@ -43,51 +43,51 @@ wire I_beq=~Op[5]&~Op[4]&~Op[3]&Op[2]&~Op[1]&~Op[0];
 wire I_bne=~Op[5]&~Op[4]&~Op[3]&Op[2]&~Op[1]&Op[0];
 wire E_beq=~E_Op[5]&~E_Op[4]&~E_Op[3]&E_Op[2]&~E_Op[1]&~E_Op[0];
 wire E_bne=~E_Op[5]&~E_Op[4]&~E_Op[3]&E_Op[2]&~E_Op[1]&E_Op[0];
-//±¾´ÎÖ¸Áî¶ÔÓ¦µÄÖ¸Ê¾ĞÅºÅ
-//Regrt=0£¬ÊÇrd£»Regrt=1£¬²»ÊÇrd
+//æœ¬æ¬¡æŒ‡ä»¤å¯¹åº”çš„æŒ‡ç¤ºä¿¡å·
+//Regrt=0ï¼Œæ˜¯rdï¼›Regrt=1ï¼Œä¸æ˜¯rd
 assign Regrt = I_addi|I_andi|I_ori|I_lw|I_sw|I_beq|I_bne;
-//se=0£¬Âß¼­À©Õ¹£»se=1£¬·ûºÅÀ©Õ¹
+//se=0ï¼Œé€»è¾‘æ‰©å±•ï¼›se=1ï¼Œç¬¦å·æ‰©å±•
 assign Se = I_addi|I_lw|I_sw|I_beq|I_bne;
-//Wreg=0£¬²»Ğ´¼Ä´æÆ÷£»Wreg=1£¬Ğ´¼Ä´æÆ÷
+//Wreg=0ï¼Œä¸å†™å¯„å­˜å™¨ï¼›Wreg=1ï¼Œå†™å¯„å­˜å™¨
 assign Wreg = I_add|I_sub|I_and|I_or|I_addi|I_andi|I_ori|I_lw;
-//Wmem=0£¬²»Ğ´´æ´¢Æ÷£»Wmem=1£¬Ğ´´æ´¢Æ÷
+//Wmem=0ï¼Œä¸å†™å­˜å‚¨å™¨ï¼›Wmem=1ï¼Œå†™å­˜å‚¨å™¨
 assign Wmem = I_sw;
-//Aluqb=0£¬µÚ¶ş¸ö²Ù×÷Êı²»ÊÇ¼Ä´æÆ÷£»Aluqb=1£¬µÚ¶ş¸ö²Ù×÷ÊıÊÇ¼Ä´æÆ÷
+//Aluqb=0ï¼Œç¬¬äºŒä¸ªæ“ä½œæ•°ä¸æ˜¯å¯„å­˜å™¨ï¼›Aluqb=1ï¼Œç¬¬äºŒä¸ªæ“ä½œæ•°æ˜¯å¯„å­˜å™¨
 assign Aluqb = I_add|I_sub|I_and|I_or|I_beq|I_bne;
 assign Aluc[1] = I_and|I_or|I_andi|I_ori;
 assign Aluc[0] = I_sub|I_or|I_ori|I_beq|I_bne;
-//pcÖµµÄÀ´Ô´
+//pcå€¼çš„æ¥æº
 assign Pcsrc[1] = (E_beq&Z)|(E_bne&~Z);
-assign Pcsrc[0] = 0;//Ô­À´×¼±¸·ÅÈëÎŞÌõ¼şÌø×ª
-//Reg2reg=0£¬¼Ä´æÆ÷ÖµÀ´×Ô´æ´¢Æ÷£»Reg2reg=1£¬¼Ä´æÆ÷Öµ²»À´×Ô´æ´¢Æ÷
+assign Pcsrc[0] = 0;//åŸæ¥å‡†å¤‡æ”¾å…¥æ— æ¡ä»¶è·³è½¬
+//Reg2reg=0ï¼Œå¯„å­˜å™¨å€¼æ¥è‡ªå­˜å‚¨å™¨ï¼›Reg2reg=1ï¼Œå¯„å­˜å™¨å€¼ä¸æ¥è‡ªå­˜å‚¨å™¨
 assign Reg2reg = ~I_lw;
 
-//E_InstÖ¸Ê¾rtÊÇ·ñÊÇÔ´¼Ä´æÆ÷
+//E_InstæŒ‡ç¤ºrtæ˜¯å¦æ˜¯æºå¯„å­˜å™¨
 wire E_Inst = I_add|I_sub|I_and|I_or|I_sw|I_beq|I_bne;
 
-//condep = 1ÓĞÌõ¼şÒÀÀµ£¬condepl = 0ÎŞÌõ¼şÒÀÀµ
+//condep = 1æœ‰æ¡ä»¶ä¾èµ–ï¼Œcondepl = 0æ— æ¡ä»¶ä¾èµ–
 assign condep=(E_beq&Z)|(E_bne&~Z);
 
 always@(E_Rd,M_Rd,E_Wreg,M_Wreg,Rs)begin
-    //²»Ç°ÍÆ
+    //ä¸å‰æ¨
     FwdA=2'b00;
-    //Ç°ÍÆÖ´ĞĞ¶Î½á¹û
+    //å‰æ¨æ‰§è¡Œæ®µç»“æœ
     if((Rs==E_Rd)&(E_Rd!=0)&(E_Wreg==1))begin
         FwdA=2'b10;
     end 
-    //Ç°ÍÆ·Ã´æ¶Î½á¹û
+    //å‰æ¨è®¿å­˜æ®µç»“æœ
     else if ((Rs==M_Rd)&(M_Rd!=0)&(M_Wreg==1))begin
         FwdA=2'b01;
     end
 end
 always@(E_Rd,M_Rd,E_Wreg,M_Wreg,Rt)begin
-    //²»Ç°ÍÆ
+    //ä¸å‰æ¨
     FwdB=2'b00;
-    //Ç°ÍÆÖ´ĞĞ¶Î½á¹û
+    //å‰æ¨æ‰§è¡Œæ®µç»“æœ
     if((Rt==E_Rd)&(E_Rd!=0)&(E_Wreg==1))begin
         FwdB=2'b10;
     end 
-    //Ç°ÍÆ·Ã´æ¶Î½á¹û
+    //å‰æ¨è®¿å­˜æ®µç»“æœ
     else if((Rt==M_Rd)&(M_Rd!=0)&(M_Wreg==1))begin
         FwdB=2'b01;
     end

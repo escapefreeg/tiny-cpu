@@ -14,7 +14,7 @@ wire E_Wreg,E_Reg2reg,E_Wmem,E_Aluqb,Cout,M_Wreg,M_Reg2reg,M_Wmem,W_Wreg,W_Reg2r
 
 COUNTER counter(Clk,Clrn,Instnum);
 
-//IF¶Î
+//IFæ®µ
 MUX4X32 mux4x32(IF_PCadd4,0,E_PC,0,Pcsrc,IF_Result);
 PC pc(IF_Result,Clk,En,Clrn,IF_Addr);
 PCAdd4 pcadd4(IF_Addr,IF_PCadd4);
@@ -22,26 +22,26 @@ INSTMEM instmem(IF_Addr,IF_Inst);
 REGifid ifid(IF_PCadd4,IF_Inst,En,Clk,Clrn,ID_PCadd4,ID_Inst,condep);
 
 
-//ID¶Î
+//IDæ®µ
 CONUNIT conunit(E_Op,ID_Inst[31:26],ID_Inst[5:0],Z,Regrt,Se,Wreg,Aluqb,Aluc,Wmem,Pcsrc,Reg2reg,ID_Inst[25:21],ID_Inst[20:16],E_Rd,M_Rd,E_Wreg,M_Wreg,FwdA,FwdB,E_Reg2reg,condep);
 MUX2X5 mux2x5(ID_Inst[15:11],ID_Inst[20:16],Regrt,ID_Wr);
-EXT16T32 ext16t32(ID_Inst[15:0],Se,ID_EXTIMM);//½«16Î»Á¢¼´ÊıÀ©Õ¹Îª32Î»
+EXT16T32 ext16t32(ID_Inst[15:0],Se,ID_EXTIMM);//å°†16ä½ç«‹å³æ•°æ‰©å±•ä¸º32ä½
 REGFILE regfile(ID_Inst[25:21],ID_Inst[20:16],D,W_Wr,W_Wreg,Clk,Clrn,ID_Qa,ID_Qb);
-SHIFTER32_L2 shifter2(ID_EXTIMM,ID_EXTIMM_L2);//½«32Î»Êı¾İ×óÒÆÁ½Î»
-CLA_32 cla_32(ID_PCadd4,ID_EXTIMM_L2,0,ID_PC,Cout);//½«pc+4ºÍÀ©Õ¹ºóµÄÁ¢¼´ÊıÏà¼Ó£¨¼´Ìø×ªµØÖ·£©
+SHIFTER32_L2 shifter2(ID_EXTIMM,ID_EXTIMM_L2);//å°†32ä½æ•°æ®å·¦ç§»ä¸¤ä½
+CLA_32 cla_32(ID_PCadd4,ID_EXTIMM_L2,0,ID_PC,Cout);//å°†pc+4å’Œæ‰©å±•åçš„ç«‹å³æ•°ç›¸åŠ ï¼ˆå³è·³è½¬åœ°å€ï¼‰
 REGidex idex(ID_PC,Wreg,Reg2reg,Wmem,ID_Inst[31:26],Aluc,Aluqb,ID_Qa,ID_Qb,ID_EXTIMM,ID_Wr,En,Clk,Clrn,E_Wreg,E_Reg2reg,E_Wmem,E_Op,E_Aluc,E_Aluqb,E_R1,E_R2,E_I,E_Rd,FwdA,FwdB,E_FwdA,E_FwdB,E_PC,condep);
 
-//EX¶Î
+//EXæ®µ
 MUX4X32 mux4x32_ex_1(E_R1,D,M_R,0,E_FwdA,Alu_X);
 MUX4X32 mux4x32_ex_2(E_R2,D,M_R,0,E_FwdB,E_NUM);
 MUX2X32 mux2x321(E_I,E_NUM,E_Aluqb,Y);
 ALU alu(Alu_X,Y,E_Aluc,E_R,Z);
 REGexmem exmem(E_Wreg,E_Reg2reg,E_Wmem,E_PC,E_R,E_R2,E_Rd,En,Clk,Clrn,M_Wreg,M_Reg2reg,M_Wmem,M_PC,M_R,M_S,M_Rd);
 
-//MEM¶Î
+//MEMæ®µ
 DATAMEM datamem(M_R,M_S,Clk,M_Wmem,Dout);
 REGmemwb memwb(M_Wreg,M_Reg2reg,M_R,Dout,M_Rd,En,Clk,Clrn,W_Wreg,W_Reg2reg,W_D,W_C,W_Wr);
 
-//WB¶Î
+//WBæ®µ
 MUX2X32 mux2x322(W_C,W_D,W_Reg2reg,D);
 endmodule

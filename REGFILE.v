@@ -11,7 +11,7 @@ initial begin
         regs[i] = 32'b0;
     end
 end
-//Êä³öÊı¾İ
+//æ€»æ˜¯è¯»å‡ºç›¸åº”åœ°å€çš„æ•°æ®
 assign Qa = regs[Ra];
 assign Qb = regs[Rb];
 
